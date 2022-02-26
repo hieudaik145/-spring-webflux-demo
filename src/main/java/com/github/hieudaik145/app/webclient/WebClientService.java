@@ -1,6 +1,6 @@
 package com.github.hieudaik145.app.webclient;
 
-import com.github.hieudaik145.app.rest.Student;
+import com.github.hieudaik145.app.service.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public class WebClientService {
                 .retrieve()
                 .onStatus(Predicate.not(HttpStatus::is2xxSuccessful), clientResponse -> Mono.error(new StudentServiceException("Error while communicating to student service")))
                 .bodyToMono(Student.class);
-        
+
         studentMono.subscribe(System.out::println);
         System.out.println("Webclient demonstrate non-blocking value");
     }
@@ -36,5 +36,17 @@ public class WebClientService {
         studentFlux.subscribe(System.out::println);
 
         System.out.println("Webclient demonstrate non-blocking value");
+    }
+
+    public void getRestStudent() {
+        Flux<Student> studentFlux = webClient.get()
+                .uri("/rest/students")
+                .retrieve()
+                .onStatus(Predicate.not(HttpStatus::is2xxSuccessful), clientResponse -> Mono.error(new StudentServiceException("Error while communicating to student service")))
+                .bodyToFlux(Student.class);
+
+        studentFlux.subscribe(System.out::println);
+
+        System.out.println("Webclient call rest api demonstrate non-blocking value");
     }
 }

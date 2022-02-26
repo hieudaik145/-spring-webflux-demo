@@ -1,4 +1,4 @@
-package com.github.hieudaik145.app.rest;
+package com.github.hieudaik145.app.service;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

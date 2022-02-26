@@ -26,4 +26,11 @@ public class WebClientResource {
 
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/webclient/test/rest-api")
+    public ResponseEntity<Void> testWebClientCallRestAPI() {
+        webClientService.getRestStudent();
+
+        return ResponseEntity.ok().build();
+    }
 }

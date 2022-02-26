@@ -1,4 +1,4 @@
-package com.github.hieudaik145.app.rest;
+package com.github.hieudaik145.app.service;
 
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -19,5 +19,9 @@ public class StudentService {
                 new Student(3L, "NGUYEN", "C", 1997),
                 new Student(4L, "NGUYEN", "C", 1997)
         );
+    }
+
+    public Mono<Student> addStudent(Mono<Student> studentMono) {
+        return studentMono;
     }
 }
